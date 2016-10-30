@@ -12,7 +12,8 @@
         "intervention/image": "^2.3",
         "codeception/codeception": "*",
         "nesbot/carbon": "^1.21",
-        "laravel-ja/comja5": "^1.0"
+        "laravel-ja/comja5": "^1.0",
+        "laravel/socialite": "~2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

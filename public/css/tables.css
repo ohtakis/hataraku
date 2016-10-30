@@ -1,0 +1,54 @@
+.for_users{
+ 	color:white;
+	background-color:#f0ad4e !important;
+}
+
+.receive{
+	color:white;
+	background-color:#FF6600 !important;
+}
+
+.adjustment{
+	color:white;
+	background-color:#FFFF66 !important;
+}
+
+.before_confirm{
+	color:white;
+	background-color:#66CCFF !important;
+}
+
+.today_confirm{
+	color:white;
+	background-color:#FFABCE !important;
+}
+
+.complete{
+}
+
+.cancel{
+	color:white;
+	background-color:#A9A9A9 !important;
+}
+
+.needed{
+	color:red;
+}
+
+.btn-open{
+    color: #5cb85c !important;
+    background-image: none !important;
+    background-color: transparent !important;
+    border-color: #5cb85c !important;
+}
+
+.btn-hide{
+    color: #d9534f !important;
+    background-image: none !important;
+    background-color: transparent !important;
+    border-color: #d9534f !important;
+}
+
+input[type=radio] {
+    margin: 0px 0 0;
+}
