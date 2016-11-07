@@ -46,12 +46,18 @@ class SocialController extends Controller
         $fuser = $this->socialite->driver('facebook')->user();
 
         //各情報の取得
-        $fuser->getId();
-        $fuser->getName();
-        $fuser->getEmail();
+        // if ($fuser) {
+        //     dd($fuser);
+        // } else {
+        //     return 'something went wrong';
+        // }
+
+         // $fuser->getId();
+         // $fuser->getName();
+         // $fuser->getEmail();
 
         //とりあえず表示
-        return $fuser->getEmail();
+        return $fuser->name;
     }
 
 }
