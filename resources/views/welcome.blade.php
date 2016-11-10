@@ -1,91 +1,79 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.test')
 
-        <title>Laravel</title>
+@section('style')
+<!-- CSS個別読み込みを書くスペース -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
+@endsection
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway';
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
+@section('content')
+    <div>
+<!--     <form action="/welcome" method="POST">
+        {!! csrf_field() !!}
+      <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="pk_test_OylzmhJTBUANpxWlN0zlTcFE"
+        data-amount="999"
+        data-name="Demo Site"
+        data-description="Widget"
+        data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+        data-locale="auto"
+        data-currency="jpy">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
+        });
+      </script>
+    </form> -->
+    <input id="amount" type="number" name="money" placeholder="50円からm(_ _)m" step="50" min="50">
+    <button id="customButton">差し入れする</button>
+    </div>
+@endsection
 
-            .full-height {
-                height: 100vh;
+@section('script')
+<!-- スクリプト個別読み込みを書くスペース -->
+<script src="https://checkout.stripe.com/checkout.js"></script>
+<script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
+        });
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
+    var handler = StripeCheckout.configure({
+      key: 'pk_test_OylzmhJTBUANpxWlN0zlTcFE',
+      image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+      locale: 'auto',
+      token: function(token) {
+        // You can access the token ID with `token.id`.
+        // Get the token ID to your server-side code for use.
+        var stripeToken = token.id;
+        var stripeEmail = token.email;
+        var amount = $('#amount').val();
+        $.post(
+            "/welcome", /* your route here */
+            { stripeToken: stripeToken, stripeEmail: stripeEmail , amount: amount},
+            function(data) {
+              console.log("succcess!");
             }
+        );
+      }
+    });
 
-            .position-ref {
-                position: relative;
-            }
+    document.getElementById('customButton').addEventListener('click', function(e) {
+      // Open Checkout with further options:
+      handler.open({
+        name: 'TEST',
+        description: 'TESTTEST',
+        currency: 'jpy',
+        amount: $('#amount').val()
+      });
+      e.preventDefault();
+    });
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    <a href="{{ url('/login') }}">Login</a>
-                    <a href="{{ url('/register') }}">Register</a>
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+    // Close Checkout on page navigation:
+    window.addEventListener('popstate', function() {
+      handler.close();
+    });
+</script>
+@endsection
