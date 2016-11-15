@@ -25,7 +25,7 @@
         });
       </script>
     </form> -->
-    <!-- test　プルリク用test -->
+    <!-- test　プルリク用test2222 -->
     <input id="amount" type="number" name="money" placeholder="50円からm(_ _)m" step="50" min="50">
     <button id="customButton">差し入れする</button>
     </div>
