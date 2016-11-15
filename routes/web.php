@@ -16,6 +16,8 @@ Route::get('/welcome', function () {
 });
 
 Route::post('/welcome', function () {
+
+	//ここにstripeアカウントのAPIキーをコピペ
 	\Stripe\Stripe::setApiKey("sk_test_CAHdfJxmcqO0dMHTGRPepRXl");
 
 	// Get the credit card details submitted by the form
@@ -35,6 +37,7 @@ Route::post('/welcome', function () {
 	}
 	return view('home');
 });
+
 
 Route::get('/', function () {
     return view('home');
