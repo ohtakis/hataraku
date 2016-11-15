@@ -12,11 +12,11 @@
       <script
         src="https://checkout.stripe.com/checkout.js" class="stripe-button"
         data-key="pk_test_OylzmhJTBUANpxWlN0zlTcFE"
-        data-amount="1000"
+        data-amount="999"
         data-name="Demo Site"
         data-description="Widget"
         data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
-        data-locale="ja"
+        data-locale="auto"
         data-currency="jpy">
         $.ajaxSetup({
             headers: {
